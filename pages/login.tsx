@@ -92,8 +92,8 @@ const login = () => {
               Login
             </button>
           </form>
-          <p>
-            Dont have an account?{' '}
+          <p style={{ textAlign: 'center' }}>
+            {`Don't`} have an account?
             <Link href='/register' passHref>
               <a className={styles.link}> Register now.</a>
             </Link>
