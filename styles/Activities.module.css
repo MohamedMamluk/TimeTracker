@@ -1,0 +1,85 @@
+.activities__container {
+  width: 95%;
+  padding: 1rem;
+}
+.activity {
+  width: 100%;
+  background-color: red;
+  border-radius: 30px;
+  height: 200px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+.activity__color {
+  height: 15%;
+}
+.activity__details {
+  border-radius: 30px;
+  background-color: rgb(29, 32, 75);
+  height: 85%;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.activity__details:hover {
+  background-color: rgb(32, 35, 75);
+}
+.activity__name_edit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.activity_name {
+  font-weight: 500;
+}
+.activity_edit {
+  display: flex;
+  gap: 2px;
+  cursor: pointer;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  display: block;
+  border-radius: 50%;
+  display: flex;
+  background-color: white;
+  position: relative;
+}
+.time__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.activity__time {
+  text-align: center;
+  font-size: 18px;
+}
+.activity__time h2 {
+  font-weight: 300;
+}
+@media screen and (min-width: 768px) {
+  .activities__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+  .time__container {
+    flex-direction: column;
+  }
+  .activity {
+    width: 40%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .activities__container {
+    align-items: center;
+    height: 90vh;
+    overflow-y: scroll;
+  }
+  .activity {
+    width: 30%;
+  }
+}
