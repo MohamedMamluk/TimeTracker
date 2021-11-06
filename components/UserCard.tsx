@@ -1,13 +1,16 @@
 import React from 'react';
 import styles from '../styles/UserCard.module.css';
-const UserCard = () => {
+import { CardProps } from '../ProjectsTypes';
+
+const UserCard: React.FC<CardProps> = ({ name, loginState }) => {
   return (
     <section className={styles.user__card}>
       <div className={styles.user__info}>
         <div className={styles.user__image}></div>
         <div className={styles.user__name_container}>
           <p>Report for</p>
-          <h1 className={styles.user__name}>Jeremy Robson</h1>
+          <h1 className={styles.user__name}>{name}</h1>
+          <button>{loginState ? 'Logout' : 'Login'}</button>
         </div>
       </div>
       <div className={styles.periods__container}>

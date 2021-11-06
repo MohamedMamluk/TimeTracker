@@ -7,68 +7,47 @@ import { actionCreators, State } from '../state';
 import styles from '../styles/Home.module.css';
 import { bindActionCreators } from 'redux';
 import UserCard from '../components/UserCard';
-import Activiries from '../components/Activities';
+import Activities from '../components/Activities';
 import axios from 'axios';
-type User = {
-  name: string | null;
-};
 const Home = () => {
   const dispatch = useDispatch();
-  const { loginUser, logoutUser } = bindActionCreators(
+  const { loginUser, logoutUser, readActivities } = bindActionCreators(
     actionCreators,
     dispatch
   );
   const userState = useSelector((state: State) => state.user);
-  const [user, setUser] = React.useState<User['name']>(null);
-  React.useEffect(() => {
-    const userToken = localStorage.getItem('user');
-    if (userToken) {
-      const token = JSON.parse(userToken).token;
-      try {
-        axios
-          .get('https://time-tracking-api-mamluk.herokuapp.com/api/v1/items', {
-            headers: {
-              authorization: `Bearer ${token}`,
-            },
-          })
-          .then((res) => console.log(res.data));
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  }, []);
-  const addItem = async () => {
-    const userToken = localStorage.getItem('user');
-    if (userToken) {
-      console.log(JSON.parse(userToken).token);
-      try {
-        await axios
-          .post('https://time-tracking-api-mamluk.herokuapp.com/api/v1/items', {
-            // body: {
-            //   name: 'Programming',
-            //   time: '0',
-            // },
-            headers: {
-              authorization: `Bearer ${JSON.parse(userToken).token}`,
-            },
-          })
-          .then((res) => console.log(res.data));
-      } catch (error) {
-        console.log(error);
-      }
+  const [loginState, setLoginState] = React.useState(false);
+  const [data, setData] = React.useState([]);
+  const getItems = async (token: string) => {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    try {
+      const { data } = await axios.get(
+        'https://time-tracking-api-mamluk.herokuapp.com/api/v1/items',
+        {
+          headers: headers,
+        }
+      );
+      readActivities(data);
+      setData(data);
+    } catch (error) {
+      console.log(error);
     }
   };
-  // React.useEffect(() => {
-  //   const userData = localStorage.getItem('user');
-  //   if (!userData) {
-  //     logoutUser();
-  //   } else {
-  //     const name = userData && JSON.parse(userData).user.name;
-  //     loginUser(name);
-  //     setUser(userState.user);
-  //   }
-  // }, [userState.user]);
-  const [loading, setLoading] = React.useState(true);
+  React.useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      setLoginState(true);
+      const {
+        token,
+        user: { name },
+      } = JSON.parse(user);
+      loginUser(name, token);
+
+      getItems(token);
+    }
+  }, []);
   return (
     <main className={styles.container}>
       <Head>
@@ -77,9 +56,14 @@ const Home = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <section className={styles.main__section}>
-        <UserCard />
-        <Activiries />
-        <button onClick={() => addItem()}>Add item</button>
+        <UserCard
+          name={userState.user ? userState.user : 'Guest'}
+          loginState={loginState}
+        />
+        <Activities
+          data={data}
+          token={userState.token ? userState.token : ''}
+        />
       </section>
     </main>
   );

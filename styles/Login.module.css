@@ -12,60 +12,6 @@
   overflow: hidden;
   padding: 1rem 0;
 }
-.login__form__container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.login__form {
-  width: 90%;
-  margin-top: 3rem;
-}
-.input__wrapper {
-  width: 100%;
-  position: relative;
-  border-radius: 10px;
-  overflow: hidden;
-}
-.input__wrapper {
-  margin-bottom: 1rem;
-}
-.input {
-  width: 100%;
-  padding: 5px 10px;
-  font-weight: 500;
-  font-size: larger;
-}
-.show__password {
-  position: absolute;
-  right: 4px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 25px;
-  cursor: pointer;
-}
-.show__password:hover {
-  border-radius: 20px;
-  background: rgba(128, 128, 128, 0.5);
-}
-.form__submit {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  width: 100%;
-  padding: 0.5rem 0;
-  border-radius: 10px;
-  font-size: larger;
-  border: 1px solid white;
-  background-color: inherit;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.5s ease;
-}
-.form__submit:hover {
-  background-color: teal;
-}
 .link {
   color: rgba(135, 206, 250, 0.801);
 }
@@ -81,8 +27,6 @@
   height: 100%;
 }
 
-@media screen and (min-width: 768px) {
-}
 @media screen and (min-width: 1024px) {
   .login__container {
     padding: 0;
@@ -90,13 +34,5 @@
   }
   .login__image__container {
     display: block;
-  }
-  .login__form__container {
-    width: 40%;
-  }
-}
-@media screen and (min-width: 1440px) {
-  .login__form {
-    width: 60%;
   }
 }

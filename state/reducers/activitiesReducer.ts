@@ -1,22 +1,31 @@
 import { ActivitiesActions } from '../Actions';
 import { ActionTypes } from '../ActionTypes';
-type Activity = {};
-const initialState: Activity[] = [];
+import { ActivityTypes } from '../../ProjectsTypes';
+const initialState: ActivityTypes[] = [];
 
 const activitiesReducer = (state = initialState, action: ActivitiesActions) => {
   switch (action.type) {
     case ActionTypes.CREATE_ACTIVITY:
-      break;
+      const newActivity = action.payload;
+      return [...state, newActivity];
     case ActionTypes.READ_ACTIVITIES:
-      break;
+      const fetchedActivities = action.payload;
+      return (state = fetchedActivities);
     case ActionTypes.UPDATE_ACTIVITY:
-      break;
+      const payloadActivity = action.payload;
+      const filteredActivities = state.filter(
+        (activity) => activity._id !== payloadActivity._id
+      );
+      return [...filteredActivities, payloadActivity];
     case ActionTypes.DELETE_ACTIVITY:
-      break;
+      const removedActivity = action.payload;
+      const newFilteredActivities = state.filter(
+        (activity) => activity._id !== removedActivity._id
+      );
+      return [...newFilteredActivities];
 
     default:
       return state;
-      break;
   }
 };
 export default activitiesReducer;

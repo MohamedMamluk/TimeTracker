@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import styles from '../styles/Login.module.css';
+import formStyles from '../styles/Forms.module.css';
 // import img from '../components/PageImages/LoginBG.jpg';
-import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../state';
@@ -13,6 +15,7 @@ const login = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [show, setShow] = React.useState(false);
+  const router = useRouter();
   const dispatch = useDispatch();
   const { loginUser } = bindActionCreators(actionCreators, dispatch);
   const loginUserLocal = async () => {
@@ -24,16 +27,17 @@ const login = () => {
       )
       .then((res) => {
         const user = res.data;
-        loginUser(res.data.user.name);
+        loginUser(res.data.user.name, res.data.token);
         console.log(res.data);
         localStorage.setItem('user', JSON.stringify(user));
+        router.push('/');
       })
       .catch((err) => console.log(err));
   };
   return (
     <section className={styles.login__page}>
       <div className={styles.login__container}>
-        <div className={styles.login__form__container}>
+        <div className={formStyles.form__container}>
           <h1>Account Login</h1>
           {/* <Link href='/'>go back</Link> */}
           <form
@@ -41,26 +45,26 @@ const login = () => {
               e.preventDefault();
               loginUserLocal();
             }}
-            className={styles.login__form}
+            className={formStyles.form}
           >
-            <div className={styles.input__wrapper}>
+            <div className={formStyles.input__wrapper}>
               <input
                 type='email'
                 name='email'
                 id='email'
                 value={email}
-                className={styles.input}
+                className={formStyles.input}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder='Email...'
               />
             </div>
-            <div className={styles.input__wrapper}>
+            <div className={formStyles.input__wrapper}>
               <input
                 type={show ? 'text' : 'password'}
                 name='password'
                 id='password'
                 value={password}
-                className={styles.input}
+                className={formStyles.input}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder='Password...'
               />
@@ -68,22 +72,22 @@ const login = () => {
               {show ? (
                 <AiOutlineEye
                   fill='black'
-                  className={styles.show__password}
+                  className={formStyles.show__password}
                   onClick={() => setShow(!show)}
                 />
               ) : (
                 <AiOutlineEyeInvisible
                   fill='black'
-                  className={styles.show__password}
+                  className={formStyles.show__password}
                   onClick={() => setShow(!show)}
                 />
               )}
             </div>
-            <div className={styles.remember__password}>
+            <div className={formStyles.remember__password}>
               <input type='checkbox' id='remember' />
               <label htmlFor='remember'> Remember Me?</label>
             </div>
-            <button className={styles.form__submit} type='submit'>
+            <button className={formStyles.form__submit} type='submit'>
               Login
             </button>
           </form>
