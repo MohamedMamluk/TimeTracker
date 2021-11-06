@@ -20,6 +20,48 @@ const Home = () => {
   );
   const userState = useSelector((state: State) => state.user);
   const [user, setUser] = React.useState<User['name']>(null);
+  React.useEffect(() => {
+    const userToken = localStorage.getItem('user');
+    if (userToken) {
+      const token = JSON.parse(userToken).token;
+      try {
+        axios
+          .get('https://time-tracking-api-mamluk.herokuapp.com/api/v1/items', {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          })
+          .then((res) => console.log(res.data));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, []);
+  const addItem = async () => {
+    const userToken = localStorage.getItem('user');
+    if (userToken) {
+      console.log(JSON.parse(userToken).token);
+      try {
+        await axios
+          .post(
+            'https://time-tracking-api-mamluk.herokuapp.com/api/v1/items/',
+            {
+              // body: {
+              //   name: 'Programming',
+              //   time: '0',
+              // },
+              headers: {
+                Authorization:
+                  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTg1NGIzMTFmNmI5ZjAwMDRmY2JmZmYiLCJuYW1lIjoibW9oYW1lZCIsImVtYWlsIjoibW9oYW1lZG1hbWx1a0BnbWFpbC5jb20iLCJpYXQiOjE2MzYxNzkwOTUsImV4cCI6MTYzODc3MTA5NX0.KKhbBjsRajk2jOwSMVqdUDz5YUiaq0fk4Pc_4aYXj9U',
+              },
+            }
+          )
+          .then((res) => console.log(res.data));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
   // React.useEffect(() => {
   //   const userData = localStorage.getItem('user');
   //   if (!userData) {
@@ -41,6 +83,7 @@ const Home = () => {
       <section className={styles.main__section}>
         <UserCard />
         <Activiries />
+        <button onClick={() => addItem()}>Add item</button>
       </section>
     </main>
   );

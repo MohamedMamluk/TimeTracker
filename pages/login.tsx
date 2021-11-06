@@ -3,7 +3,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import styles from '../styles/Login.module.css';
-import img from '../public/PageImages/Login.jpg';
+// import img from '../components/PageImages/LoginBG.jpg';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -64,12 +64,7 @@ const login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder='Password...'
               />
-              {/* <button
-                className={styles.show__password}
-                onClick={() => setShow(!show)}
-              >
-                {' '}
-              </button> */}
+
               {show ? (
                 <AiOutlineEye
                   fill='black'
@@ -100,7 +95,18 @@ const login = () => {
           </p>
         </div>
         <div className={styles.login__image__container}>
-          <Image className={styles.login__image} src={img} />
+          {/* <Image
+            width='500'
+            height='500'
+            layout='responsive'
+            className={styles.login__image}
+            src={img}
+          /> */}
+          <img
+            src='/PageImages/LoginGif.gif'
+            alt=''
+            className={styles.login__image}
+          />
         </div>
       </div>
     </section>

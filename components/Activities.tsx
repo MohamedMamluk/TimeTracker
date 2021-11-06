@@ -7,17 +7,6 @@ const Activiries = () => {
   return (
     <section className={styles.activities__container}>
       <Activity />
-      <Activity />
-      <Activity />
-      <Activity />
-      <Activity />
-      <Activity />
-      <Activity />
-      <Activity />
-      <Activity />
-      <Activity />
-      <Activity />
-      <Activity />
     </section>
   );
 };
