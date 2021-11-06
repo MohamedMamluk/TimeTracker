@@ -43,19 +43,15 @@ const Home = () => {
       console.log(JSON.parse(userToken).token);
       try {
         await axios
-          .post(
-            'https://time-tracking-api-mamluk.herokuapp.com/api/v1/items/',
-            {
-              // body: {
-              //   name: 'Programming',
-              //   time: '0',
-              // },
-              headers: {
-                Authorization:
-                  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTg1NGIzMTFmNmI5ZjAwMDRmY2JmZmYiLCJuYW1lIjoibW9oYW1lZCIsImVtYWlsIjoibW9oYW1lZG1hbWx1a0BnbWFpbC5jb20iLCJpYXQiOjE2MzYxNzkwOTUsImV4cCI6MTYzODc3MTA5NX0.KKhbBjsRajk2jOwSMVqdUDz5YUiaq0fk4Pc_4aYXj9U',
-              },
-            }
-          )
+          .post('https://time-tracking-api-mamluk.herokuapp.com/api/v1/items', {
+            // body: {
+            //   name: 'Programming',
+            //   time: '0',
+            // },
+            headers: {
+              authorization: `Bearer ${JSON.parse(userToken).token}`,
+            },
+          })
           .then((res) => console.log(res.data));
       } catch (error) {
         console.log(error);
