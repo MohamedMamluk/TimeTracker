@@ -6,7 +6,8 @@
   width: 100%;
   background-color: red;
   border-radius: 30px;
-  height: 200px;
+
+  min-height: 200px;
   margin-bottom: 1rem;
   overflow: hidden;
   position: relative;

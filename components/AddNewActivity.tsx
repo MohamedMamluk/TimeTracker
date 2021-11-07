@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import styles from '../styles/Activities.module.css';
 import { bindActionCreators } from 'redux';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import formStyles from '../styles/Forms.module.css';
 import { NewActivityProps } from '../ProjectsTypes';
 import { actionCreators } from '../state';

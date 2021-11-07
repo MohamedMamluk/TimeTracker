@@ -21,3 +21,11 @@ export interface NewActivityProps {
 export interface DetailsPropsdata {
   details: ActivityTypes;
 }
+export interface EditActivityProps {
+  id: string;
+  name: string;
+  time: string;
+  color: string;
+  token: string;
+  setEdit: React.Dispatch<React.SetStateAction<boolean>>;
+}
