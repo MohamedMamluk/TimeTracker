@@ -44,7 +44,6 @@ const Home = () => {
         user: { name },
       } = JSON.parse(user);
       loginUser(name, token);
-
       getItems(token);
     }
   }, []);
@@ -60,6 +59,7 @@ const Home = () => {
           name={userState.user ? userState.user : 'Guest'}
           loginState={loginState}
         />
+
         <Activities
           data={data}
           token={userState.token ? userState.token : ''}

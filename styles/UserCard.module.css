@@ -2,9 +2,10 @@
   width: 95%;
   background-color: rgb(29, 32, 75);
   border-radius: 30px;
+  height: auto;
+  border: 1px solid white;
 }
 .user__info {
-  border: 1px solid red;
   background-color: rgb(87, 70, 234);
   display: flex;
   justify-content: space-evenly;
@@ -51,7 +52,7 @@
 } */
 @media screen and (min-width: 1440px) {
   .user__card {
-    height: 400px;
+    min-height: 400px;
     width: 40%;
   }
   .user__info {
