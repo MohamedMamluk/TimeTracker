@@ -83,6 +83,13 @@ const EditActivity: React.FC<EditActivityProps> = ({
           />
         </div>
         <button className={formStyles.form__submit}>Edit</button>
+        <button
+          type='button'
+          onClick={() => setEdit(false)}
+          className={formStyles.form__submit}
+        >
+          Cancel
+        </button>
       </form>
     </div>
   );
