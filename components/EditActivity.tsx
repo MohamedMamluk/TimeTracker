@@ -16,13 +16,11 @@ const EditActivity: React.FC<EditActivityProps> = ({
   setEdit,
 }) => {
   const [values, setValues] = React.useState({ name, time, color });
-  console.log(`Edit values component is : ${values}`);
   const [active, setActive] = React.useState(false);
   const dispatch = useDispatch();
   const { patchActivities } = bindActionCreators(actionCreators, dispatch);
   const handleChange = (e: any) => {
     setValues({ ...values, [e.target.name]: e.target.value });
-    console.log(values);
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -37,7 +35,7 @@ const EditActivity: React.FC<EditActivityProps> = ({
       setActive(false);
       setEdit(false);
     } catch (error) {
-      console.log(error);
+      alert('Please check your inputs');
     }
   };
   return (

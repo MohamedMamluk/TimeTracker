@@ -54,6 +54,10 @@
 .form__submit:hover {
   background-color: teal;
 }
+.form__submit:disabled {
+  opacity: 0.5;
+  color: red;
+}
 @media screen and (min-width: 1024px) {
   .form__container {
     width: 40%;

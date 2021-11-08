@@ -7,13 +7,18 @@ import AddNewActivity from './AddNewActivity';
 import { State } from '../state';
 const Activities: React.FC<ActivitiesProps> = ({ data, token }) => {
   const activities = useSelector((state: State) => state.activities);
+
   return (
     <section className={styles.activities__container}>
       {activities &&
         activities.map((item, index) => {
           return <Activity details={item} key={index} />;
         })}
-      <AddNewActivity token={token} />
+      {!token ? (
+        <h1>Please login to add activities</h1>
+      ) : (
+        <AddNewActivity token={token} />
+      )}
     </section>
   );
 };

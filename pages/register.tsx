@@ -15,14 +15,24 @@ const register = () => {
   const [password, setPassword] = React.useState('');
   const router = useRouter();
   const registerUser = async () => {
-    console.log({ name, email, password });
     await axios
       .post(
         `https://time-tracking-api-mamluk.herokuapp.com/api/v1/auth/register`,
         { name, email, password }
       )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        router.push('/login');
+      })
+      .catch((err) => {
+        if (!name || name.length < 5) {
+          alert(
+            'Name should be more than 5 characters, please enter your full name.'
+          );
+        }
+        if (err.response.status == 500) {
+          alert('Email is already taken');
+        }
+      });
   };
   return (
     <section className={styles.login__page}>

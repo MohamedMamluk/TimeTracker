@@ -11,7 +11,7 @@ import Activities from '../components/Activities';
 import axios from 'axios';
 const Home = () => {
   const dispatch = useDispatch();
-  const { loginUser, logoutUser, readActivities } = bindActionCreators(
+  const { loginUser, readActivities } = bindActionCreators(
     actionCreators,
     dispatch
   );
@@ -30,6 +30,8 @@ const Home = () => {
         }
       );
       readActivities(data);
+      setLoginState(true);
+
       setData(data);
     } catch (error) {
       console.log(error);
@@ -44,7 +46,10 @@ const Home = () => {
         user: { name },
       } = JSON.parse(user);
       loginUser(name, token);
-      getItems(token);
+      getItems(userState.token ? userState.token : token);
+    }
+    if (userState.token) {
+      getItems(userState.token);
     }
   }, []);
   return (

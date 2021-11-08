@@ -8,13 +8,16 @@ import { NewActivityProps } from '../ProjectsTypes';
 import { actionCreators } from '../state';
 
 const AddNewActivity: React.FC<NewActivityProps> = ({ token }) => {
-  const [values, setValues] = React.useState({ name: '', time: '', color: '' });
+  const [values, setValues] = React.useState({
+    name: '',
+    time: '',
+    color: '000000',
+  });
   const [active, setActive] = React.useState(false);
   const dispatch = useDispatch();
   const { createActivity } = bindActionCreators(actionCreators, dispatch);
   const handleChange = (e: any) => {
     setValues({ ...values, [e.target.name]: e.target.value });
-    console.log(values);
   };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -26,6 +29,7 @@ const AddNewActivity: React.FC<NewActivityProps> = ({ token }) => {
         { headers: headers }
       );
       createActivity(res.data);
+      setValues({ name: '', time: '', color: '000000' });
       setActive(false);
     } catch (error) {
       console.log(error);
@@ -76,6 +80,13 @@ const AddNewActivity: React.FC<NewActivityProps> = ({ token }) => {
             />
           </div>
           <button className={formStyles.form__submit}>Add</button>
+          <button
+            className={formStyles.form__submit}
+            type='button'
+            onClick={() => setActive(false)}
+          >
+            Cancel
+          </button>
         </form>
       ) : (
         <div onClick={() => setActive(!active)} className={styles.add}>

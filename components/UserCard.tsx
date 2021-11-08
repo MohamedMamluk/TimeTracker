@@ -20,20 +20,31 @@ const UserCard: React.FC<CardProps> = ({ name, loginState }) => {
   return (
     <section className={styles.user__card}>
       <div className={styles.user__info}>
-        <div className={styles.user__image}></div>
+        <div className={styles.user__image}>
+          <h1>{name[0].toLocaleUpperCase()}</h1>
+        </div>
         <div className={styles.user__name_container}>
           <p>Report for</p>
           <h1 className={styles.user__name}>{name}</h1>
-          <button onClick={() => (loginState ? logout() : login())}>
+          <button
+            className={styles.log}
+            onClick={() => (loginState ? logout() : login())}
+          >
             {loginState ? 'Logout' : 'Login'}
           </button>
         </div>
       </div>
       <div className={styles.periods__container}>
         <ul className={styles.periods}>
-          <li className={styles.period}>Daily</li>
-          <li className={styles.period}>Weekly</li>
-          <li className={styles.period}>Monthly</li>
+          <li className={styles.period} onClick={() => alert('Coming Soon')}>
+            Daily
+          </li>
+          <li className={styles.period} onClick={() => alert('Coming Soon')}>
+            Weekly
+          </li>
+          <li className={styles.period} onClick={() => alert('Coming Soon')}>
+            Monthly
+          </li>
         </ul>
       </div>
     </section>

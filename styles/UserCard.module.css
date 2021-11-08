@@ -18,7 +18,12 @@
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background-color: lime;
+  border: 2px solid white;
+  background-color: rgb(29, 32, 75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
 }
 .user__name_container {
   display: flex;
@@ -31,6 +36,22 @@
   inline-size: 150px;
   line-height: 1.2;
 }
+.log {
+  margin-bottom: 1rem;
+  width: 100%;
+  padding: 0.5rem 0;
+  border-radius: 10px;
+  font-size: larger;
+  border: 1px solid white;
+  background-color: inherit;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+.log:hover {
+  background-color: teal;
+}
+
 .periods__container {
   padding: 2rem 0;
 }

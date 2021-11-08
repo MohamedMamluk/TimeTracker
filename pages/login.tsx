@@ -15,31 +15,39 @@ const login = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [show, setShow] = React.useState(false);
+  const [waiting, setWaiting] = React.useState(false);
+  const [remember, setRemember] = React.useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
   const { loginUser } = bindActionCreators(actionCreators, dispatch);
   const loginUserLocal = async () => {
-    console.log({ email, password });
+    setWaiting(true);
     await axios
       .post(
         `https://time-tracking-api-mamluk.herokuapp.com/api/v1/auth/login`,
         { email, password }
       )
       .then((res) => {
+        setWaiting(false);
         const user = res.data;
         loginUser(res.data.user.name, res.data.token);
-        console.log(res.data);
-        localStorage.setItem('user', JSON.stringify(user));
+        if (remember) {
+          localStorage.setItem('user', JSON.stringify(user));
+        }
         router.push('/');
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setWaiting(false);
+        alert(
+          'Please check that you entered your Email and Password correctly'
+        );
+      });
   };
   return (
     <section className={styles.login__page}>
       <div className={styles.login__container}>
         <div className={formStyles.form__container}>
           <h1>Account Login</h1>
-          {/* <Link href='/'>go back</Link> */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -56,6 +64,7 @@ const login = () => {
                 className={formStyles.input}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder='Email...'
+                required
               />
             </div>
             <div className={formStyles.input__wrapper}>
@@ -67,6 +76,7 @@ const login = () => {
                 className={formStyles.input}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder='Password...'
+                required
               />
 
               {show ? (
@@ -84,11 +94,20 @@ const login = () => {
               )}
             </div>
             <div className={formStyles.remember__password}>
-              <input type='checkbox' id='remember' />
+              <input
+                type='checkbox'
+                id='remember'
+                checked={remember}
+                onChange={() => setRemember(!remember)}
+              />
               <label htmlFor='remember'> Remember Me?</label>
             </div>
-            <button className={formStyles.form__submit} type='submit'>
-              Login
+            <button
+              className={formStyles.form__submit}
+              type='submit'
+              disabled={waiting ? true : false}
+            >
+              {waiting ? 'Please wait...' : 'Login'}
             </button>
           </form>
           <p style={{ textAlign: 'center' }}>
@@ -99,13 +118,6 @@ const login = () => {
           </p>
         </div>
         <div className={styles.login__image__container}>
-          {/* <Image
-            width='500'
-            height='500'
-            layout='responsive'
-            className={styles.login__image}
-            src={img}
-          /> */}
           <img
             src='/PageImages/LoginGif.gif'
             alt=''
