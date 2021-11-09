@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styles from '../styles/Login.module.css';
 import formStyles from '../styles/Forms.module.css';
-
+import Head from 'next/head';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 
 const register = () => {
@@ -36,6 +36,9 @@ const register = () => {
   };
   return (
     <section className={styles.login__page}>
+      <Head>
+        <title>Register</title>
+      </Head>
       <div className={styles.login__container}>
         <div className={formStyles.form__container}>
           <h1>Account Creation</h1>

@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-
+import Head from 'next/head';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import styles from '../styles/Login.module.css';
 import formStyles from '../styles/Forms.module.css';
@@ -45,6 +45,9 @@ const login = () => {
   };
   return (
     <section className={styles.login__page}>
+      <Head>
+        <title>Login</title>
+      </Head>
       <div className={styles.login__container}>
         <div className={formStyles.form__container}>
           <h1>Account Login</h1>
