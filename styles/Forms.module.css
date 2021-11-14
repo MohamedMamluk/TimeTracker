@@ -7,7 +7,6 @@
 }
 .form {
   width: 90%;
-  margin-top: 3rem;
 }
 .input__wrapper {
   width: 100%;
@@ -18,6 +17,7 @@
 .label {
   margin-bottom: 10px;
   display: block;
+  mix-blend-mode: difference;
 }
 .input {
   width: 100%;
@@ -49,6 +49,8 @@
   background-color: inherit;
   color: white;
   cursor: pointer;
+  mix-blend-mode: difference;
+
   transition: background-color 0.5s ease;
 }
 .form__submit:hover {

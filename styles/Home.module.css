@@ -11,7 +11,7 @@
 
 @media screen and (min-width: 1440px) {
   .container {
-    padding: 1rem;
+    padding: 0 10rem;
   }
   .main__section {
     flex-direction: row;

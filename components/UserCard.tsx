@@ -1,22 +1,22 @@
-import React from 'react';
-import styles from '../styles/UserCard.module.css';
-import { CardProps } from '../ProjectsTypes';
-import { useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { useRouter } from 'next/router';
-import { actionCreators } from '../state';
+import React from 'react'
+import styles from '../styles/UserCard.module.css'
+import { CardProps } from '../ProjectsTypes'
+import { useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { useRouter } from 'next/router'
+import { actionCreators } from '../state'
 const UserCard: React.FC<CardProps> = ({ name, loginState }) => {
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const { logoutUser } = bindActionCreators(actionCreators, dispatch);
+  const router = useRouter()
+  const dispatch = useDispatch()
+  const { logoutUser } = bindActionCreators(actionCreators, dispatch)
   const login = () => {
-    router.push('/login');
-  };
+    router.push('/login')
+  }
   const logout = () => {
-    localStorage.clear();
-    logoutUser();
-    router.reload();
-  };
+    localStorage.clear()
+    logoutUser()
+    router.reload()
+  }
   return (
     <section className={styles.user__card}>
       <div className={styles.user__info}>
@@ -34,7 +34,7 @@ const UserCard: React.FC<CardProps> = ({ name, loginState }) => {
           </button>
         </div>
       </div>
-      <div className={styles.periods__container}>
+      {/* <div className={styles.periods__container}>
         <ul className={styles.periods}>
           <li className={styles.period} onClick={() => alert('Coming Soon')}>
             Daily
@@ -46,9 +46,9 @@ const UserCard: React.FC<CardProps> = ({ name, loginState }) => {
             Monthly
           </li>
         </ul>
-      </div>
+      </div> */}
     </section>
-  );
-};
+  )
+}
 
-export default UserCard;
+export default UserCard

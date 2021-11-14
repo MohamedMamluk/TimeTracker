@@ -6,10 +6,7 @@
   width: 100%;
   background-color: red;
   border-radius: 30px;
-
-  min-height: 200px;
   margin-bottom: 1rem;
-  overflow: hidden;
   position: relative;
 }
 .activity__options {
@@ -47,7 +44,6 @@
   align-items: center;
   height: auto;
   padding: 2rem 0;
-  margin-bottom: 1rem;
   overflow: hidden;
 }
 .add {
@@ -84,6 +80,8 @@
 }
 .activity_name {
   font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .activity_edit {
   display: flex;
@@ -100,16 +98,15 @@
   position: relative;
 }
 .time__container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  text-align: center;
 }
 .activity__time {
   text-align: center;
-  font-size: 18px;
+  font-size: 1.25rem;
 }
 .activity__time h2 {
   font-weight: 300;
+  text-align: center;
 }
 @media screen and (min-width: 768px) {
   .activities__container {
@@ -129,11 +126,17 @@
 @media screen and (min-width: 1440px) {
   .activities__container {
     align-items: center;
+    align-items: flex-start;
+    row-gap: 1rem;
     height: 90vh;
     overflow-y: scroll;
+    padding-top: 12rem;
   }
   .activity,
   .newActivity {
     width: 30%;
+  }
+  .activity {
+    height: 100px;
   }
 }

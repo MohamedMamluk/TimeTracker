@@ -1,35 +1,35 @@
-import React from 'react';
-import styles from '../styles/Activities.module.css';
-import { DetailsPropsdata } from '../ProjectsTypes';
-import { useDispatch, useSelector } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { actionCreators, State } from '../state';
-import EditActivity from './EditActivity';
-import axios from 'axios';
+import React from 'react'
+import styles from '../styles/Activities.module.css'
+import { DetailsPropsdata } from '../ProjectsTypes'
+import { useDispatch, useSelector } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { actionCreators, State } from '../state'
+import EditActivity from './EditActivity'
+import axios from 'axios'
 const Activity: React.FC<DetailsPropsdata> = ({ details }) => {
-  const [options, setOptions] = React.useState(false);
-  const [edit, setEdit] = React.useState(false);
-  const dispatch = useDispatch();
-  const { deleteActivities } = bindActionCreators(actionCreators, dispatch);
-  const user = useSelector((state: State) => state.user);
+  const [options, setOptions] = React.useState(false)
+  const [edit, setEdit] = React.useState(false)
+  const dispatch = useDispatch()
+  const { deleteActivities } = bindActionCreators(actionCreators, dispatch)
+  const user = useSelector((state: State) => state.user)
   const deleteActivity = async (id: string) => {
-    const headers = { Authorization: `Bearer ${user.token}` };
+    const headers = { Authorization: `Bearer ${user.token}` }
     try {
       const res = await axios.delete(
         `https://time-tracking-api-mamluk.herokuapp.com/api/v1/items/${id}`,
         { headers: headers }
-      );
-      deleteActivities(res.data);
+      )
+      deleteActivities(res.data)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
   return (
     <div
       className={styles.activity}
       style={{
         backgroundColor: `${details.color}`,
-        height: `${edit ? 'auto' : '200px'}`,
+        height: `${edit ? 'auto' : '200px'}`
       }}
     >
       <div
@@ -48,7 +48,7 @@ const Activity: React.FC<DetailsPropsdata> = ({ details }) => {
       ) : (
         <div className={styles.activity__details}>
           <div className={styles.activity__name_edit}>
-            <h2 className={styles.activity_name}>{details.name}</h2>
+            <h3 className={styles.activity_name}>{details.name}</h3>
             <div
               className={styles.activity_edit}
               onClick={() => setOptions(!options)}
@@ -62,9 +62,7 @@ const Activity: React.FC<DetailsPropsdata> = ({ details }) => {
             <div className={styles.activity__time}>
               <h2>{details.time} Hrs</h2>
             </div>
-            <div className={styles.activity__last_week}>
-              <p>Last week: 36 Hours</p>
-            </div>
+            <div className={styles.activity__last_week}></div>
           </div>
         </div>
       )}
@@ -74,8 +72,8 @@ const Activity: React.FC<DetailsPropsdata> = ({ details }) => {
         <p
           className={styles.option}
           onClick={() => {
-            setEdit(!edit);
-            setOptions(!options);
+            setEdit(!edit)
+            setOptions(!options)
           }}
         >
           Edit
@@ -83,15 +81,15 @@ const Activity: React.FC<DetailsPropsdata> = ({ details }) => {
         <p
           className={styles.option}
           onClick={() => {
-            setOptions(!options);
-            deleteActivity(details._id);
+            setOptions(!options)
+            deleteActivity(details._id)
           }}
         >
           Delete
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Activity;
+export default Activity
